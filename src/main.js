@@ -2,7 +2,7 @@ import { doCreator } from './doCreator.js';
 import { validation } from './validation.js';
 
 const doInput = document.getElementById('doInput');
-const doButton = document.getElementById('doButton');
+const addButton = document.getElementById('addButton');
 const error = document.getElementById('error');
 
 doInput.addEventListener('keypress', e => {
@@ -20,10 +20,13 @@ doInput.addEventListener('blur', () => {
     error.innerHTML = ''
 })
 
-doButton.addEventListener('click', e => {
+addButton.addEventListener('click', e => {
+    error.innerHTML = ''
+    if(doInput.value !== '' && doInput.value.length <= 20) {
+        doCreator(doInput.value)
+        doInput.value = ''
+    }
     validation(doInput.value, error)
-    if(doInput.value !== '' && doInput.value <= 20) doCreator(doInput.value);
-    doInput.value = '';
 });
 
 doButton.addEventListener('blur', () => {
